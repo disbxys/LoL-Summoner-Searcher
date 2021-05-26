@@ -5,8 +5,8 @@ import config as Consts
 
 
 # Variables
-WINDOW_TITLE = 'Sample Program'
-TITLE_TEXT = 'Riot Summoner Searcher'
+WINDOW_TITLE = TITLE_TEXT = 'LoL Summoner Searcher'
+
 DESTROY_TEXT = 'END ME!'
 
 class AppGUI():
