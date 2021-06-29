@@ -30,7 +30,7 @@ class AppGUI():
 
 
         # Set the title of the window
-        self.root_window.title('Sample Program')
+        self.root_window.title(WINDOW_TITLE)
 
 
         # Create the label(s)
