@@ -33,7 +33,3 @@ URL = {
     'summoner_by_name': 'lol/summoner/v{version}/summoners/by-name/{names}',
     'ladder_by_queue': 'lol/league/v{version}/entries/{queue}/{tier}/{division}'
 }
-
-HEADER = {
-    'API-KEY': API_KEY
-}

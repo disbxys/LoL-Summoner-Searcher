@@ -8,22 +8,18 @@ class RiotAPI():
         self.api_key = api_key
         self.region = region
 
-
-    def _request(self, api_url, params={}):
-        args = {'api_key': self.api_key}
-
-        for key, value in params.items():
-            if key not in args:
-                args[key] = value
+    def _request(self, api_url, params=None):
+        params = dict() if params == None else params
+        headers = {'X-Riot-Token': self.api_key}
         
         response = requests.get(
             Consts.URL['base'].format(
                 region=self.region,
                 url=api_url
             ),
-            params=args
+            params=params,
+            headers=headers
         )
-        
         return response.json()
 
     def get_summoner_by_name(self, name):
