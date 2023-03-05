@@ -32,5 +32,17 @@ class RiotAPI():
             names=name
         )
         return self._request(api_url)
-
     
+    def get_league_queue(
+            self,
+            queue:Consts.LEAGUE_QUEUE,
+            tier:Consts.LEAUGE_TIER,
+            div:Consts.LEAGUE_DIVISION):
+        
+        api_url = Consts.URL["ladder_by_queue"].format(
+            version=Consts.API_VERSIONS["version"],
+            queue=queue,
+            tier=tier,
+            division=div
+        )
+        return self._request(api_url)

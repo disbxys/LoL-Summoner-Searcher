@@ -1,10 +1,10 @@
-API_KEY = 'Insert your api key here'
+from typing_extensions import Literal
 
+API_KEY = 'Insert your api key here'
 
 API_VERSIONS = {
     'version': '4'
-    }
-
+}
 
 # Dictionary of all regions with key
 # as full name of region and value
@@ -22,16 +22,18 @@ REGIONS = {
     'Turkey': 'tr1',
     'Russia': 'ru',
     'PBE': 'pbe1'
-    }
+}
 
-
+LEAGUE_DIVISION = Literal["I", "II", "III", "IV"]
+LEAUGE_TIER = Literal["DIAMOND", "PLATINUM", "GOLD", "SILVER", "BRONZE"]
+LEAGUE_QUEUE = Literal["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
 
 URL = {
     'base': 'https://{region}.api.riotgames.com/{url}',
     'summoner_by_name': 'lol/summoner/v{version}/summoners/by-name/{names}',
-    'ladder_by_queue': 'lol/league/v4/entries/{queue}/{tier}/{division}'
-    }
+    'ladder_by_queue': 'lol/league/v{version}/entries/{queue}/{tier}/{division}'
+}
 
 HEADER = {
     'API-KEY': API_KEY
-    }
+}
