@@ -11,7 +11,7 @@ class RiotAPI():
 
     def __init__(
             self,
-            api_key: Optional[str] = None,
+            api_key: str,
             region: Consts.Region = Consts.Region.NORTH_AMERICA):
         
         # If an api key is not passed in, try to grab the api key
@@ -63,7 +63,7 @@ class RiotAPI():
         if tier.lower() in ["challenger", "grandmaster", "master"]:
             api_url = Consts.URL["master_plus_ladder_by_queue"].format(
                 version=Consts.API_VERSIONS["version"],
-                tier=f"{tier}leagues",
+                tier=f"{tier.lower()}leagues",
                 queue=queue
             )
         else:

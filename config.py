@@ -5,13 +5,13 @@ from typing_extensions import Literal
 
 load_dotenv()       # load env file
 
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("API_KEY", "")
 
 API_VERSIONS = {
     'version': '4'
 }
 
-class Region(Enum):
+class Region(str, Enum):
     BRAZIL = "br1"
     EUROPE_NE = "eun1"
     EUROPE_WEST = "enw1"
