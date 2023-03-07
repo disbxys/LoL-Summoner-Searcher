@@ -1,7 +1,11 @@
+from dotenv import load_dotenv
 from enum import Enum
+import os
 from typing_extensions import Literal
 
-API_KEY = 'Insert your api key here'
+load_dotenv()       # load env file
+
+API_KEY = os.getenv("API_KEY")
 
 API_VERSIONS = {
     'version': '4'

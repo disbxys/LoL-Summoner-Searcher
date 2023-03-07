@@ -11,11 +11,16 @@ class RiotAPI():
 
     def __init__(
             self,
-            api_key: str,
+            api_key: Optional[str] = None,
             region: Consts.Region = Consts.Region.NORTH_AMERICA):
-        if api_key is None: raise MissingAPIKeyException
+        
+        # If an api key is not passed in, try to grab the api key
+        # from the consts file.
+        if (api_key is None) and (Consts.API_KEY is None):
+            raise MissingAPIKeyException
+        else:
+            self.api_key = api_key or Consts.API_KEY or ""
 
-        self.api_key = api_key
         self.region = region
 
     def _request(
