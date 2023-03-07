@@ -1,4 +1,8 @@
-from typing_extensions import Literal
+from enum import Enum
+try:
+    from typing import Literal
+except ImportError:
+    from typing_extensions import Literal
 
 API_KEY = 'Insert your api key here'
 
@@ -6,23 +10,23 @@ API_VERSIONS = {
     'version': '4'
 }
 
-# Dictionary of all regions with key
-# as full name of region and value
-# as regional endpoint marker
-REGIONS = {
-    'Brazil': 'br',
-    'Europe NE': 'eun1',
-    'Europe West': 'euw1',
-    'Japan': 'jp1',
-    'Korea': 'kr',
-    'Latin America North': 'la1',
-    'Latin America South': 'la2',
-    'North America': 'na1',
-    'Oceania': 'oc1',
-    'Turkey': 'tr1',
-    'Russia': 'ru',
-    'PBE': 'pbe1'
-}
+class Region:
+    BRAZIL = "br1"
+    EUROPE_NE = "eun1"
+    EUROPE_WEST = "enw1"
+    JAPAN = "jp1"
+    KOREA = "kr"
+    LATIN_AMERICA_NORTH = "la1"
+    LATIN_AMERICA_SOUTH = "la2"
+    NORTH_AMERICA = "na1"
+    OCEANIA = "oc1"
+    PBE = "pbe1"
+    PHILLIPPINES = "ph2"
+    RUSSIA = "ru"
+    SINGAPORE = "sg2"
+    THAILAND = "th2"
+    TURKEY = "tr1"
+    VIETNAM = "vn2"
 
 LEAGUE_DIVISION = Literal["I", "II", "III", "IV"]
 LEAUGE_TIER = Literal[

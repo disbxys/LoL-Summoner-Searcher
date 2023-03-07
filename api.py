@@ -12,7 +12,7 @@ class RiotAPI():
     def __init__(
             self,
             api_key: str,
-            region: str = Consts.REGIONS['North America']):
+            region: Consts.Region = Consts.Region.NORTH_AMERICA):
         if api_key is None: raise MissingAPIKeyException
 
         self.api_key = api_key
