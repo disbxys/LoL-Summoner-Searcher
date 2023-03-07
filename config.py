@@ -1,8 +1,5 @@
 from enum import Enum
-try:
-    from typing import Literal
-except ImportError:
-    from typing_extensions import Literal
+from typing_extensions import Literal
 
 API_KEY = 'Insert your api key here'
 
@@ -10,7 +7,7 @@ API_VERSIONS = {
     'version': '4'
 }
 
-class Region:
+class Region(Enum):
     BRAZIL = "br1"
     EUROPE_NE = "eun1"
     EUROPE_WEST = "enw1"

@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import requests
 
@@ -21,7 +21,7 @@ class RiotAPI():
     def _request(
             self,
             api_url: str,
-            params: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+            params: Optional[Dict[str, str]] = None) -> Any:
         params = dict() if params == None else params
         headers = {'X-Riot-Token': self.api_key}
         
