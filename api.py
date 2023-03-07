@@ -47,15 +47,25 @@ class RiotAPI():
             self,
             queue: Consts.LEAGUE_QUEUE,
             tier: Consts.LEAUGE_TIER,
-            div: Consts.LEAGUE_DIVISION) -> List[Dict[str, Any]]:
+            div: Optional[Consts.LEAGUE_DIVISION] = None) -> List[Dict[str, Any]]:
         """
         Return a sorted list of players depending on the ranked queue, division,
         and tier.
         """
-        api_url = Consts.URL["ladder_by_queue"].format(
-            version=Consts.API_VERSIONS["version"],
-            queue=queue,
-            tier=tier,
-            division=div
-        )
+
+        # Master, Grandmaster, and Challenger tiers are special tiers that are
+        # not split into divisions.
+        if tier.lower() in ["challenger", "grandmaster", "master"]:
+            api_url = Consts.URL["master_plus_ladder_by_queue"].format(
+                version=Consts.API_VERSIONS["version"],
+                tier=f"{tier}leagues",
+                queue=queue
+            )
+        else:
+            api_url = Consts.URL["ladder_by_queue"].format(
+                version=Consts.API_VERSIONS["version"],
+                queue=queue,
+                tier=tier,
+                division=div
+            )
         return self._request(api_url)

@@ -25,11 +25,17 @@ REGIONS = {
 }
 
 LEAGUE_DIVISION = Literal["I", "II", "III", "IV"]
-LEAUGE_TIER = Literal["DIAMOND", "PLATINUM", "GOLD", "SILVER", "BRONZE"]
+LEAUGE_TIER = Literal[
+    "CHALLENGER", "GRANDMASTER", "MASTER",
+    "DIAMOND", "PLATINUM", "GOLD", "SILVER", "BRONZE"
+]
 LEAGUE_QUEUE = Literal["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
 
 URL = {
     'base': 'https://{region}.api.riotgames.com/{url}',
     'summoner_by_name': 'lol/summoner/v{version}/summoners/by-name/{names}',
-    'ladder_by_queue': 'lol/league/v{version}/entries/{queue}/{tier}/{division}'
+    'ladder_by_queue': 'lol/league/v{version}/entries/{queue}/{tier}/{division}',
+    'master_plus_ladder_by_queue': 'lol/league/v{version}/{tier}/by-queue/{queue}',
+    'grandmasters_ladder_by_queue': 'lol/league/v{version}/grandmasterleagues/by-queue/{queue}',
+    'challengers_ladder_by_queue': 'lol/league/v{version}/challengerleagues/by-queue/{queue}',
 }
