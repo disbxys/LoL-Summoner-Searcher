@@ -2,9 +2,14 @@ import requests
 
 import config as Consts
 
+class MissingAPIKeyException(Exception):
+    pass
+
 class RiotAPI():
 
     def __init__(self, api_key, region=Consts.REGIONS['North America']):
+        if api_key is None: raise MissingAPIKeyException
+
         self.api_key = api_key
         self.region = region
 
