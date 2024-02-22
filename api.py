@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
 
 import requests
 
@@ -11,7 +11,7 @@ class RiotAPI():
 
     def __init__(
             self,
-            api_key: str,
+            api_key: Optional[str] = None,
             region: Consts.Region = Consts.Region.NORTH_AMERICA):
         
         # If an api key is not passed in, try to grab the api key
@@ -21,12 +21,14 @@ class RiotAPI():
         else:
             self.api_key = api_key or Consts.API_KEY or ""
 
-        self.region = region
+        if isinstance(region, Consts.Region):
+            self.region = region.value
 
     def _request(
             self,
             api_url: str,
-            params: Optional[Dict[str, str]] = None) -> Any:
+            params: Optional[Dict[str, str]] = None
+    ) -> Any:
         params = dict() if params == None else params
         headers = {'X-Riot-Token': self.api_key}
         
@@ -50,9 +52,10 @@ class RiotAPI():
     
     def get_league_queue(
             self,
-            queue: Consts.LEAGUE_QUEUE,
-            tier: Consts.LEAUGE_TIER,
-            div: Optional[Consts.LEAGUE_DIVISION] = None) -> List[Dict[str, Any]]:
+            queue: Consts.Queue,
+            tier: Consts.Tier,
+            div: Optional[Consts.Division] = None
+    ) -> Any:
         """
         Return a sorted list of players depending on the ranked queue, division,
         and tier.
@@ -60,7 +63,7 @@ class RiotAPI():
 
         # Master, Grandmaster, and Challenger tiers are special tiers that are
         # not split into divisions.
-        if tier.lower() in ["challenger", "grandmaster", "master"]:
+        if tier.upper() in Consts.Tier:
             api_url = Consts.URL["master_plus_ladder_by_queue"].format(
                 version=Consts.API_VERSIONS["version"],
                 tier=f"{tier.lower()}leagues",

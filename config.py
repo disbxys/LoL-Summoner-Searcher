@@ -1,9 +1,22 @@
-from dotenv import load_dotenv
-from enum import Enum
+# from dotenv import load_dotenv
+from enum import Enum, EnumMeta
 import os
-from typing_extensions import Literal
+# from typing_extensions import Literal
 
-load_dotenv()       # load env file
+
+class MetaEnum(EnumMeta):
+    def __contains__(cls, item):
+        try:
+            cls(item)
+        except ValueError:
+            return False
+        return True    
+
+
+class BaseEnum(Enum, metaclass=MetaEnum):
+    pass
+
+# load_dotenv()       # load env file
 
 API_KEY = os.getenv("API_KEY", "")
 
@@ -11,7 +24,7 @@ API_VERSIONS = {
     'version': '4'
 }
 
-class Region(str, Enum):
+class Region(str, BaseEnum):
     BRAZIL = "br1"
     EUROPE_NE = "eun1"
     EUROPE_WEST = "enw1"
@@ -29,12 +42,33 @@ class Region(str, Enum):
     TURKEY = "tr1"
     VIETNAM = "vn2"
 
-LEAGUE_DIVISION = Literal["I", "II", "III", "IV"]
-LEAUGE_TIER = Literal[
-    "CHALLENGER", "GRANDMASTER", "MASTER",
-    "DIAMOND", "EMERALD", "PLATINUM", "GOLD", "SILVER", "BRONZE"
-]
-LEAGUE_QUEUE = Literal["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+# LEAGUE_DIVISION = Literal["I", "II", "III", "IV"]
+class Division(str, BaseEnum):
+    I = "I"
+    II = "II"
+    III = "III"
+    IV = "IV"
+
+# LEAUGE_TIER = Literal[
+#     "CHALLENGER", "GRANDMASTER", "MASTER",
+#     "DIAMOND", "EMERALD", "PLATINUM", "GOLD", "SILVER", "BRONZE"
+# ]
+class Tier(str, BaseEnum):
+    CHALLENGER = "CHALLENGER"
+    GRANDMASTER = "GRANDMASTER"
+    MASTER = "MASTER"
+    DIAMOND = "DIAMOND"
+    EMERALD = "EMERALD"
+    PLATINUM = "PLATINUM"
+    GOLD = "GOLD"
+    SILVER = "SILVER"
+    BRONZE = "BRONZE"
+
+# LEAGUE_QUEUE = Literal["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
+class Queue(str, BaseEnum):
+    SOLO_5V5 = "RANKED_SOLO_5x5"
+    FLEX_SR = "RANKED_FLEX_SR"
+    FLEX_TT = "RANKED_FLEX_TT"
 
 URL = {
     'base': 'https://{region}.api.riotgames.com/{url}',

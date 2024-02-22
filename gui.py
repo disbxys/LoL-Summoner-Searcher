@@ -109,9 +109,9 @@ class AppGUI():
 
     def display_regions(self) -> None:
         '''Displays the regions from the config file'''
-        for region in Consts.REGIONS.keys():
-            self.region_menu.add_command(label=region,
-            command=self._insert_region(region))
+        for region in Consts.Region:
+            self.region_menu.add_command(label=region.value,
+            command=self._insert_region(region.value))
 
 
     def create_entry_boxes(self) -> None:
@@ -130,6 +130,7 @@ class AppGUI():
         # Prevent the window from changing size
         self.root_window.resizable(0, 0)
 
+        # Start the GUI
         self.root_window.mainloop()
 
 
